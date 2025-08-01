@@ -1,6 +1,7 @@
-node_modules/
+echo "node_modules/
 .env
 dist/
 build/
 .vscode/
 .idea/
+" > .gitignore
