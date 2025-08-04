@@ -18,8 +18,7 @@
 //   return result.rows;
 // };// backend/models/busModel.js
 
-const db = require('../config/db'); // or your DB config
-
+const db = require('../config/db');
 const getBusesByRouteAndDate = async (fromCity, toCity, journeyDate) => {
     const query = `
         SELECT 
