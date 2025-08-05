@@ -3,7 +3,7 @@ const { decrypt } = require("../utils/encryption");
 const seatModel = require("../models/seatModel");
 const User = require("../models/userModel");
 const { getBookingById } = require("../models/bookingModel");
-const { sendTicketEmail } = require("../models/emailService");
+const { sendTicketEmail } = require("../services/emailService");
 
 const busModel = require("../models/busModel");
 

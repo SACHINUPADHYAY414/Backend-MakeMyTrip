@@ -11,7 +11,7 @@ const chatController = require("../controllers/chatBotController");
 const bookingController = require("../controllers/bookingController");
 const verifyToken = require("../middleware/verifyToken");
 const seatController = require("../controllers/seatController");
-const { sendTicketEmail } = require("../models/emailService");
+const { sendTicketEmail } = require("../services/emailService");
 
 
 // Auth Routes
