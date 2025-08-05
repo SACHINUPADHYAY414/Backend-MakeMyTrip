@@ -69,6 +69,10 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isValid = verifyPassword(password, user.salt, user.password_hash);
