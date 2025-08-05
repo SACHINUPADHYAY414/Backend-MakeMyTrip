@@ -65,6 +65,7 @@ router.post("/chatbot", chatController.chatWithOpenAI);
 router.post("/busBooking", verifyToken, bookingController.createBooking);
 router.get("/busBooking", bookingController.getAllBookings);
 router.get("/busBooking/:id", bookingController.getBookingById);
+router.get("/busBookingByUser/:userId", verifyToken, bookingController.getBookingsByUser);
 
 // for mail
 router.post("/send-ticket", sendTicketEmail);

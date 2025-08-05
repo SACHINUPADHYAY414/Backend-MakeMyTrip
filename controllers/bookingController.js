@@ -104,41 +104,27 @@ exports.getBookingById = async (req, res) => {
       .json({ message: "Failed to get booking", error: error.message });
   }
 };
-const sendBookingEmail = async (req, res) => {
+exports.getBookingsByUser = async (req, res) => {
   try {
-    const bookingId = req.params.id; // or wherever you get booking ID
+    const paramUserId = parseInt(req.params.userId);
+    const tokenUserId = req.user.id; // from verifyToken middleware
 
-    // Fetch booking + bus info from DB
-    const booking = await getBookingById(bookingId);
-
-    if (!booking) {
-      return res.status(404).json({ error: "Booking not found" });
+    if (paramUserId !== tokenUserId) {
+      return res.status(403).json({ message: "Unauthorized access to bookings." });
     }
 
-    // Assuming you get userFullName from somewhere, e.g., auth/session or booking.userid
-    const userFullName = `${booking.firstname} ${booking.lastname}`;
+    const bookings = await bookingModel.getBookingsByUserId(paramUserId);
 
-    await sendTicketEmail({
-      email: booking.email,
-      firstName: booking.firstname,
-      lastName: booking.lastname,
-      dateOfBirth: booking.dateofbirth,
-      presentAddressLine1: booking.presentaddressline1,
-      mobileNumber: booking.mobilenumber,
-      busName: booking.busname,
-      fromCity: booking.fromcity,
-      toCity: booking.tocity,
-      departure: booking.departure,
-      arrival: booking.arrival,
-      duration: booking.duration,
-      seatNumber: booking.seatnumber,
-      totalPrice: booking.totalprice,
-      userFullName
-    });
+    if (!bookings || bookings.length === 0) {
+      return res.status(404).json({ message: "No bookings found for this user" });
+    }
 
-    res.json({ message: "Email sent successfully" });
+    res.status(200).json(bookings);
   } catch (error) {
-    console.error("Error sending booking email:", error);
-    res.status(500).json({ error: "Failed to send email" });
+    console.error("Error fetching user bookings:", error);
+    res.status(500).json({ message: "Failed to get bookings", error: error.message });
   }
 };
+
+
+
