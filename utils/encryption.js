@@ -13,6 +13,7 @@ if (!keyHex || !ivHex) {
 const key = Buffer.from(keyHex, "hex"); // 32 bytes
 const iv = Buffer.from(ivHex, "hex"); // 16 bytes
 
+
 if (key.length !== 32) {
   throw new Error(
     `Invalid encryption key length: expected 32 bytes, got ${key.length}`
