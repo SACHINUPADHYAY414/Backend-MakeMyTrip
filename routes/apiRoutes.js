@@ -52,6 +52,8 @@ router.get("/buses", busController.searchBuses);
 // Chatbot
 router.post("/chatbot", chatController.chatWithOpenAI);
 
+router.post("/chatbots", chatController.chatWithGroq);
+
 router.get("/buses", busController.searchBuses);
 router.get("/buses/:id", busController.getBusDetailsById); // bus details by id
 router.post("/buses", busController.createBus); // create bus with seats
