@@ -41,7 +41,7 @@ const chatWithGroq = async (req, res) => {
       "https://api.groq.com/openai/v1/chat/completions",
       {
         // model: "llama3-70b-8192",
-        model: "llama-3.3-70b-versatile",
+        model: "llama3-8b-8192",
         messages: messages,
         temperature: 0.7
       },
